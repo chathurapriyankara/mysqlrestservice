@@ -30,7 +30,7 @@ public class MainController {
     * This method will return the details of a pizza specified by the id
     * URI to access this: http://localhost:8080/demo/findByPizzaId?id=2
     */
-    @GetMapping(path="findByPizzaId")
+    @GetMapping(path="/findByPizzaId")
     public @ResponseBody List<PizzaDetails> getPizzaById(@RequestParam Integer id) {
         return pizzaRepository.findByPizzaId(id);
     }
@@ -48,5 +48,15 @@ public class MainController {
         pizzaDetails.setPrice(price);
         pizzaRepository.save(pizzaDetails);
         return SUCCESS;
+    }
+
+    /*
+    * DELETE Operation
+    * This method will delete existing pizza item by finding it using the ID
+    * URI to access this: http://localhost:8080/demo/deleteByPizzaId?id=2
+    */
+    @GetMapping(path="/deleteByPizzaId")
+    public @ResponseBody List<PizzaDetails> deletePizzaById(@RequestParam Integer id) {
+        return pizzaRepository.deleteByPizzaId(id);
     }
 }
