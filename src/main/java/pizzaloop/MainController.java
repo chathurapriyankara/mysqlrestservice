@@ -13,7 +13,7 @@ public class MainController {
     private PizzaRepository pizzaRepository;
 
     @GetMapping(path="/all")
-    public @ResponseBody Iterable<PizzaDetails> getAllUsers() {
+    public @ResponseBody Iterable<PizzaDetails> getPizzaDetails() {
         return pizzaRepository.findAll();
     }
 }
