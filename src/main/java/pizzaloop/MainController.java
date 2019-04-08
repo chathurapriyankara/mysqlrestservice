@@ -26,7 +26,7 @@ public class MainController {
     }
 
     /*
-    * READ Operation
+    * READ Operation based on Pizza ID
     * This method will return the details of a pizza specified by the id
     * URI to access this: http://localhost:8080/demo/findByPizzaId?id=2
     */
@@ -38,6 +38,7 @@ public class MainController {
     /*
     * CREATE Operation
     * This method will crate new pizza item in the database table
+    * and returns the SUCCESS message
     * URI to access this: http://localhost:8080/demo/add?name=VegiPizza&description=VegiSupreme&price=2500.75
     */
     @GetMapping(path="/add")
@@ -53,10 +54,36 @@ public class MainController {
     /*
     * DELETE Operation
     * This method will delete existing pizza item by finding it using the ID
+    * and returns the deleted item
     * URI to access this: http://localhost:8080/demo/deleteByPizzaId?id=2
     */
     @GetMapping(path="/deleteByPizzaId")
     public @ResponseBody List<PizzaDetails> deletePizzaById(@RequestParam Integer id) {
         return pizzaRepository.deleteByPizzaId(id);
     }
+
+    /*
+    * UPDATE Operation
+    * This method will update existing pizza details by finding it using the ID
+    * and returns the updated data
+    * URI to access this: http://localhost:8080/demo/update?id=1&name=updatedname&description=updated&price=1234.56
+    */
+    @GetMapping(path="/update")
+    public @ResponseBody List<PizzaDetails> updatePizzaDetails(@RequestParam Integer id, @RequestParam String name, @RequestParam String description, @RequestParam Double price) {
+        //First get all the pizza details according to the provided ID
+        List<PizzaDetails> pizzaDetailsList = pizzaRepository.findByPizzaId(id);
+        if(!pizzaDetailsList.isEmpty()) {
+            //Iterate through the pizza list
+            for(PizzaDetails pizzaDetails: pizzaDetailsList) {
+                //Set new values
+                pizzaDetails.setName(name);
+                pizzaDetails.setDescription(description);
+                pizzaDetails.setPrice(price);
+                //Update existing pizza item
+                pizzaRepository.save(pizzaDetails);
+            }
+        }
+        return pizzaRepository.findByPizzaId(id);
+    }
+
 }
