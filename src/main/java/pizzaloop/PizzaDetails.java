@@ -9,17 +9,17 @@ import javax.persistence.Id;
 public class PizzaDetails {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
-    private Integer id;
+    private Integer pizzaId;
     private String name;
     private String description;
     private Double price;
 
-    public Integer getId() {
-        return id;
+    public Integer getPizzaId() {
+        return pizzaId;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setPizzaId(Integer pizzaId) {
+        this.pizzaId = pizzaId;
     }
 
     public String getName() {
