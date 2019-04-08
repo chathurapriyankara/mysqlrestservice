@@ -8,7 +8,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
-
+/**
+ * Created by Chathura on 4/8/2019.
+ */
 @Controller
 @RequestMapping(path="/demo")
 public class MainController {
@@ -85,5 +87,4 @@ public class MainController {
         }
         return pizzaRepository.findByPizzaId(id);
     }
-
 }
